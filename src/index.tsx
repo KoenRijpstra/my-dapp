@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider, MoralisConfig } from "@moralisweb3/react";
 
 const moralisConfig: MoralisConfig = {
-  apiKey: "MORALIS_API_KEY",
+  apiKey: process.env.REACT_APP_MORALIS_KEY || '',
 };
 
 const root = ReactDOM.createRoot(

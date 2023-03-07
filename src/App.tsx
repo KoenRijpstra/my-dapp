@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEvmWalletTokenBalances } from '@moralisweb3/react'
 
-function App() {
+const App = () => {
+  const { data: balance, error, fetch, isFetching } = useEvmWalletTokenBalances({ address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' })
+
+  if (isFetching) return <div>Fetching/Refreshing balance…</div>
+  if (error) return <div>Error {JSON.stringify(error, null, 2)}</div>
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <button onClick={()=> fetch()}>Refetch Balance</button>
+      <div>{JSON.stringify(balance, null, 2)}</div>
+    </>
+  )
 }
 
 export default App;
